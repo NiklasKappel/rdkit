@@ -46,6 +46,9 @@ class RDKIT_FORCEFIELD_EXPORT InversionContrib : public ForceFieldContrib {
   InversionContrib *copy() const override {
     return new InversionContrib(*this);
   }
+  std::vector<int> getAtomIds() const override {
+    return {d_at1Idx, d_at2Idx, d_at3Idx, d_at4Idx};
+  }
 
  private:
   int d_at1Idx{-1};

@@ -40,6 +40,11 @@ class RDKIT_DISTGEOMETRY_EXPORT ChiralViolationContrib
     return new ChiralViolationContrib(*this);
   }
 
+  std::vector<int> getAtomIds() const override {
+    return {static_cast<int>(d_idx1), static_cast<int>(d_idx2),
+            static_cast<int>(d_idx3), static_cast<int>(d_idx4)};
+  }
+
   static double calcChiralVolume(unsigned int idx1, unsigned int idx2,
                                  unsigned int idx3, unsigned int idx4,
                                  const double *pos, unsigned int dim) {

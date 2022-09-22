@@ -56,6 +56,9 @@ class RDKIT_FORCEFIELDHELPERS_EXPORT TorsionAngleContribM6
   TorsionAngleContribM6 *copy() const override {
     return new TorsionAngleContribM6(*this);
   }
+  std::vector<int> getAtomIds() const override {
+    return {d_at1Idx, d_at2Idx, d_at3Idx, d_at4Idx};
+  }
 
  private:
   int d_at1Idx{-1}, d_at2Idx{-1}, d_at3Idx{-1}, d_at4Idx{-1};

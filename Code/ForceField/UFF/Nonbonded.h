@@ -49,6 +49,7 @@ class RDKIT_FORCEFIELD_EXPORT vdWContrib : public ForceFieldContrib {
   double getEnergy(double *pos) const override;
   void getGrad(double *pos, double *grad) const override;
   vdWContrib *copy() const override { return new vdWContrib(*this); }
+  std::vector<int> getAtomIds() const override { return {d_at1Idx, d_at2Idx}; }
 
  private:
   int d_at1Idx{-1};

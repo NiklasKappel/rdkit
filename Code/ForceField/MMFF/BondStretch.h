@@ -44,6 +44,8 @@ class RDKIT_FORCEFIELD_EXPORT BondStretchContrib : public ForceFieldContrib {
     return new BondStretchContrib(*this);
   }
 
+  std::vector<int> getAtomIds() const override { return {d_at1Idx, d_at2Idx}; }
+
  private:
   int d_at1Idx{-1}, d_at2Idx{-1};  //!< indices of end points
   double d_r0;                     //!< rest length of the bond

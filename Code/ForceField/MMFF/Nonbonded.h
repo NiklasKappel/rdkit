@@ -37,6 +37,7 @@ class RDKIT_FORCEFIELD_EXPORT VdWContrib : public ForceFieldContrib {
   double getEnergy(double *pos) const override;
   void getGrad(double *pos, double *grad) const override;
   VdWContrib *copy() const override { return new VdWContrib(*this); }
+  std::vector<int> getAtomIds() const override { return {d_at1Idx, d_at2Idx}; }
 
  private:
   int d_at1Idx{-1}, d_at2Idx{-1};
@@ -60,8 +61,8 @@ class RDKIT_FORCEFIELD_EXPORT EleContrib : public ForceFieldContrib {
              double chargeTerm, std::uint8_t dielModel, bool is1_4);
   double getEnergy(double *pos) const override;
   void getGrad(double *pos, double *grad) const override;
-
   EleContrib *copy() const override { return new EleContrib(*this); }
+  std::vector<int> getAtomIds() const override { return {d_at1Idx, d_at2Idx}; }
 
  private:
   int d_at1Idx{-1}, d_at2Idx{-1};

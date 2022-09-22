@@ -55,6 +55,9 @@ class RDKIT_DISTGEOMETRY_EXPORT FourthDimContrib
   FourthDimContrib *copy() const override {
     return new FourthDimContrib(*this);
   }
+  std::vector<int> getAtomIds() const override {
+    return {static_cast<int>(d_idx)};
+  }
 
  private:
   unsigned int d_idx{0};

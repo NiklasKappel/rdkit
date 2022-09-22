@@ -52,6 +52,10 @@ class RDKIT_FORCEFIELD_EXPORT AngleConstraintContrib
     return new AngleConstraintContrib(*this);
   }
 
+  std::vector<int> getAtomIds() const override {
+    return {d_at1Idx, d_at2Idx, d_at3Idx};
+  }
+
  private:
   double computeAngleTerm(double angle) const;
   int d_at1Idx{-1}, d_at2Idx{-1},

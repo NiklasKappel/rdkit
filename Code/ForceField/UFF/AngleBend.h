@@ -54,6 +54,10 @@ class RDKIT_FORCEFIELD_EXPORT AngleBendContrib : public ForceFieldContrib {
     return new AngleBendContrib(*this);
   }
 
+  std::vector<int> getAtomIds() const override {
+    return {d_at1Idx, d_at2Idx, d_at3Idx};
+  }
+
  private:
   int d_at1Idx{-1};
   int d_at2Idx{-1};

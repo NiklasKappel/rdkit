@@ -11,6 +11,8 @@
 #ifndef __RD_FFCONTRIB_H__
 #define __RD_FFCONTRIB_H__
 
+#include <vector>
+
 namespace ForceFields {
 class ForceField;
 
@@ -31,6 +33,9 @@ class RDKIT_FORCEFIELD_EXPORT ForceFieldContrib {
 
   //! return a copy
   virtual ForceFieldContrib *copy() const = 0;
+
+  //! returns Ids of atoms that this contribution is calculated from
+  virtual std::vector<int> getAtomIds() const = 0;
 
  protected:
   ForceField *dp_forceField{nullptr};  //!< our owning ForceField

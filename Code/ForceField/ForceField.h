@@ -102,7 +102,7 @@ class RDKIT_FORCEFIELD_EXPORT ForceField {
   */
   double calcEnergy(std::vector<double> *contribs = nullptr) const;
 
-  // these next two aren't const because they may update our
+  // these next three aren't const because they may update our
   // distance matrix
 
   //! calculates and returns the energy of the position passed in
@@ -116,6 +116,21 @@ class RDKIT_FORCEFIELD_EXPORT ForceField {
       - The individual contributions may further update the distance matrix
   */
   double calcEnergy(double *pos);
+
+  //! calculates and returns the energy of the position and atoms passed in
+  /*!
+    \param pos an array of doubles.  Should be \c 3*this->numPoints() long.
+    \param atomIdConsidered a vector of bools. Should be this->numPoints() long.
+
+    \return the current energy contributed by the atoms with the Ids for which
+    atomIdConsidered[Id] is true
+
+    <b>Side effects:</b>
+      - Calling this resets the current distance matrix
+      - The individual contributions may further update the distance matrix
+  */
+  double calcPartialEnergy(double *pos,
+                           const std::vector<bool> &atomIdConsidered);
 
   //! calculates the gradient of the energy at the current position
   /*!

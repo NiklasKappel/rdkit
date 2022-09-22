@@ -43,6 +43,7 @@ class RDKIT_FORCEFIELD_EXPORT PositionConstraintContrib
   PositionConstraintContrib *copy() const override {
     return new PositionConstraintContrib(*this);
   }
+  std::vector<int> getAtomIds() const override { return {d_atIdx}; }
 
  private:
   int d_atIdx{-1};         //!< index of the restrained atom

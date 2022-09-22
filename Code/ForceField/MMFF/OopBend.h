@@ -41,6 +41,9 @@ and the angle formed by atom1-atom2-atom3
   double getEnergy(double *pos) const override;
   void getGrad(double *pos, double *grad) const override;
   OopBendContrib *copy() const override { return new OopBendContrib(*this); }
+  std::vector<int> getAtomIds() const override {
+    return {d_at1Idx, d_at2Idx, d_at3Idx, d_at4Idx};
+  }
 
  private:
   int d_at1Idx{-1}, d_at2Idx{-1}, d_at3Idx{-1}, d_at4Idx{-1};

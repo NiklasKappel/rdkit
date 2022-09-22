@@ -37,8 +37,13 @@ class RDKIT_DISTGEOMETRY_EXPORT DistViolationContrib
   double getEnergy(double *pos) const override;
 
   void getGrad(double *pos, double *grad) const override;
+
   DistViolationContrib *copy() const override {
     return new DistViolationContrib(*this);
+  }
+
+  std::vector<int> getAtomIds() const override {
+    return {static_cast<int>(d_end1Idx), static_cast<int>(d_end2Idx)};
   }
 
  private:

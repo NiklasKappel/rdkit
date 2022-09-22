@@ -52,6 +52,9 @@ class RDKIT_FORCEFIELD_EXPORT TorsionConstraintContrib
   TorsionConstraintContrib *copy() const override {
     return new TorsionConstraintContrib(*this);
   }
+  std::vector<int> getAtomIds() const override {
+    return {d_at1Idx, d_at2Idx, d_at3Idx, d_at4Idx};
+  }
 
  private:
   void setParameters(ForceField *owner, unsigned int idx1, unsigned int idx2,

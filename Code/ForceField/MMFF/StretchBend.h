@@ -50,6 +50,9 @@ class RDKIT_FORCEFIELD_EXPORT StretchBendContrib : public ForceFieldContrib {
   StretchBendContrib *copy() const override {
     return new StretchBendContrib(*this);
   }
+  std::vector<int> getAtomIds() const override {
+    return {d_at1Idx, d_at2Idx, d_at3Idx};
+  }
 
  private:
   int d_at1Idx{-1}, d_at2Idx{-1}, d_at3Idx{-1};

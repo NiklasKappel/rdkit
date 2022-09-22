@@ -51,6 +51,10 @@ class RDKIT_FORCEFIELD_EXPORT DistanceConstraintContrib
     return new DistanceConstraintContrib(*this);
   }
 
+  std::vector<int> getAtomIds() const override {
+    return {d_end1Idx, d_end2Idx};
+  }
+
  private:
   int d_end1Idx{-1}, d_end2Idx{-1};  //!< indices of end points
   double d_minLen, d_maxLen;         //!< rest length of the bond

@@ -14,6 +14,8 @@
 #include <RDGeneral/Invariant.h>
 #include <Numerics/Optimizer/BFGSOpt.h>
 
+#include <algorithm>
+
 namespace RDKit {
 namespace ForceFieldsHelper {
 void normalizeAngleDeg(double &angleDeg) {
@@ -335,6 +337,32 @@ double ForceField::calcEnergy(double *pos) {
        contrib != d_contribs.end(); contrib++) {
     double E = (*contrib)->getEnergy(pos);
     res += E;
+  }
+  return res;
+}
+
+double ForceField::calcPartialEnergy(
+    double *pos, const std::vector<bool> &atomIdConsidered) {
+  PRECONDITION(df_init, "not initialized");
+  PRECONDITION(pos, "bad position vector");
+  double res = 0.0;
+
+  this->initDistanceMatrix();
+  if (d_contribs.empty()) {
+    return res;
+  }
+
+  // now loop over the contribs
+  for (ContribPtrVect::const_iterator contrib = d_contribs.begin();
+       contrib != d_contribs.end(); contrib++) {
+    auto atomIds = (*contrib)->getAtomIds();
+    if (std::all_of(atomIds.begin(), atomIds.end(),
+                    [&atomIdConsidered](int atomId) {
+                      return atomIdConsidered[atomId];
+                    })) {
+      double E = (*contrib)->getEnergy(pos);
+      res += E;
+    }
   }
   return res;
 }
